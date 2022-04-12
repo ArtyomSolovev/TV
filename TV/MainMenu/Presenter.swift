@@ -25,14 +25,23 @@ final class Presenter {
     }
     
     private func setHandlers(){
-        view?.getNumberOfRowsHandler = { [weak self] in
-            (self?.model.getData().count) ?? 0
+        view?.getNumberOfRowsHandler = { [weak self] type in
+            (self?.model.getData(typeOfData: type).count) ?? 0
         }
-        view?.getContentForCellHandler = { [weak self] index in
-            (self?.model.getData()[index])!
+        view?.getContentForCellHandler = { [weak self] (type, index) in
+            (self?.model.getData(typeOfData: type)[index])!
         }
-        view?.onTouchedHandler = { [weak self] index in
-            self?.router.pushDetailVC(with: index)
+        view?.onTouchedHandler = { [weak self] (type, index) in
+            self?.router.pushDetailVC(with: (self?.model.getData(typeOfData: type)[index])!)
+        }
+        view?.getNumberOfFavorites = { [weak self] in
+            self?.model.getFavoritesCountChannels() ?? 0
+        }
+        view?.addToFavorites = { [weak self] id in
+            self?.model.changeStateOfFavorites(channelId: id) ?? false
+        }
+        view?.isItFavorite = { [weak self] id in
+            self?.model.contains(channelId: id) ?? false
         }
     }
     
@@ -40,7 +49,6 @@ final class Presenter {
         self.networkService.loadData { (result: Result<Welcome, Error>) in
             switch result {
             case .success(let model):
-                print("[NETWORK] model is: \(model)")
                 DispatchQueue.main.async {
                     self.model.setData(data: model.channels)
                     self.view?.reloudData()

@@ -7,9 +7,17 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+protocol CollectionViewCellDelegate: AnyObject {
+    func didTapButton(row: Int) -> Bool
+}
+
+final class CollectionViewCell: UICollectionViewCell {
+    
+    weak var delegate: CollectionViewCellDelegate?
+    private var dataProvider = DataProvider()
     
     static let id = "CollectionViewCell"
+    private var idOfChannel: Int?
 
     private var imageView : UIImageView = {
         let image = UIImageView()
@@ -22,11 +30,15 @@ class CollectionViewCell: UICollectionViewCell {
     private var imageIcon : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        button.imageView?.tintColor = UIColor(hex: "#939699")
+        button.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    @objc private func addToFavorites(sender: UIButton!) {
+        setFavoritesIcon(change: delegate?.didTapButton(row: idOfChannel ?? 0) ?? false)
+    }
     
     private var nameLabel: UILabel = {
         let label = UILabel()
@@ -46,19 +58,18 @@ class CollectionViewCell: UICollectionViewCell {
     }()
     
     func setChannel(channel: Channel){
-        DispatchQueue.global().async { [weak self] in
-            guard let url = URL(string: channel.image) else {return}
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.imageView.image = image
-                    }
-                }
-            }
+        guard let url = URL(string: channel.image) else {return}
+        dataProvider.downloadImage(url: url) { image in
+            self.imageView.image = image
         }
         self.nameLabel.text = channel.nameRu
         self.broadcastLabel.text = channel.current?.title
+        self.idOfChannel = channel.id
         self.backgroundColor = UIColor(hex: "#373740")
+    }
+    
+    func setFavoritesIcon(change: Bool) {
+        self.imageIcon.imageView?.tintColor = change ?  UIColor(hex: "#115CFF") : UIColor(hex: "#939699")
     }
     
     override var isHighlighted: Bool {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CustomSegmentedControlDelegate:class {
+protocol CustomSegmentedControlDelegate: AnyObject {
     func change(to index:Int)
 }
 
@@ -31,7 +31,6 @@ class CustomSegmentedControl: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.backgroundColor = UIColor.white
         updateView()
     }
     

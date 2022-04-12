@@ -10,7 +10,7 @@ import Foundation
 protocol IRouter {
     func setRootController(controller: ViewController)
     func setTargerController(controller: DetailViewController)
-    func pushDetailVC(with index: Int)
+    func pushDetailVC(with channel: Channel)
 }
 
 final class Router {
@@ -28,10 +28,13 @@ extension Router: IRouter {
         self.targetController = controller
     }
 
-    func pushDetailVC(with index: Int) {
+    func pushDetailVC(with channel: Channel) {
         guard let targetController = self.targetController else {
             return
         }
-        self.controller?.navigationController?.pushViewController(targetController, animated: true)
+        targetController.modalPresentationStyle = .fullScreen
+        targetController.setSelectedChannel(channel: channel)
+//        self.controller?.navigationController?.pushViewController(targetController, animated: false)
+        self.controller?.present(targetController, animated: true)
     }
 }

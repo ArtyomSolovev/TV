@@ -23,6 +23,12 @@
 		AC31880E2800AF6D00D9BF30 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31880D2800AF6D00D9BF30 /* Network.swift */; };
 		AC3188122800C2E100D9BF30 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3188112800C2E100D9BF30 /* Extention.swift */; };
 		AC31881428036C6800D9BF30 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881328036C6800D9BF30 /* CustomSegmentedControl.swift */; };
+		AC31881728046B9C00D9BF30 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881628046B9C00D9BF30 /* DetailView.swift */; };
+		AC31881928046C7D00D9BF30 /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881828046C7D00D9BF30 /* DetailModel.swift */; };
+		AC31881B2804780C00D9BF30 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881A2804780C00D9BF30 /* DetailPresenter.swift */; };
+		AC31881D2804B52A00D9BF30 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */; };
+		AC31881F2805619500D9BF30 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881E2805619500D9BF30 /* Favorites.swift */; };
+		AC3188212805D93200D9BF30 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3188202805D93200D9BF30 /* DataProvider.swift */; };
 		DA37E0664D3A5EDAA1C50564 /* Pods_TV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA4BEF8CB0B959FD38CC91B /* Pods_TV.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +54,12 @@
 		AC31880D2800AF6D00D9BF30 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AC3188112800C2E100D9BF30 /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
 		AC31881328036C6800D9BF30 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		AC31881628046B9C00D9BF30 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		AC31881828046C7D00D9BF30 /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
+		AC31881A2804780C00D9BF30 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		AC31881E2805619500D9BF30 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		AC3188202805D93200D9BF30 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +118,9 @@
 				AC31880A2800A24100D9BF30 /* Detail */,
 				AC3187FB280030AF00D9BF30 /* Channel.swift */,
 				AC3188112800C2E100D9BF30 /* Extention.swift */,
+				AC31881E2805619500D9BF30 /* Favorites.swift */,
 				AC31880D2800AF6D00D9BF30 /* Network.swift */,
+				AC3188202805D93200D9BF30 /* DataProvider.swift */,
 				AC3187EE27FF2AB000D9BF30 /* Assets.xcassets */,
 				AC3187F027FF2AB000D9BF30 /* LaunchScreen.storyboard */,
 				AC3187F327FF2AB000D9BF30 /* Info.plist */,
@@ -120,9 +134,9 @@
 				AC3188022800A1EC00D9BF30 /* Assembly.swift */,
 				AC3188042800A1FB00D9BF30 /* Router.swift */,
 				AC3187E927FF2AAF00D9BF30 /* ViewController.swift */,
-				AC3188062800A20900D9BF30 /* Presenter.swift */,
-				AC3187FF2800A1B800D9BF30 /* View.swift */,
 				AC3188082800A21700D9BF30 /* Model.swift */,
+				AC3187FF2800A1B800D9BF30 /* View.swift */,
+				AC3188062800A20900D9BF30 /* Presenter.swift */,
 				AC3187FD28009E2000D9BF30 /* CollectionViewCell.swift */,
 				AC31881328036C6800D9BF30 /* CustomSegmentedControl.swift */,
 			);
@@ -133,6 +147,10 @@
 			isa = PBXGroup;
 			children = (
 				AC31880B2800A27900D9BF30 /* DetailViewController.swift */,
+				AC31881828046C7D00D9BF30 /* DetailModel.swift */,
+				AC31881628046B9C00D9BF30 /* DetailView.swift */,
+				AC31881A2804780C00D9BF30 /* DetailPresenter.swift */,
+				AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -251,6 +269,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC31881928046C7D00D9BF30 /* DetailModel.swift in Sources */,
+				AC31881F2805619500D9BF30 /* Favorites.swift in Sources */,
+				AC3188212805D93200D9BF30 /* DataProvider.swift in Sources */,
 				AC31880C2800A27900D9BF30 /* DetailViewController.swift in Sources */,
 				AC3188072800A20900D9BF30 /* Presenter.swift in Sources */,
 				AC31880E2800AF6D00D9BF30 /* Network.swift in Sources */,
@@ -258,13 +279,16 @@
 				AC3188052800A1FB00D9BF30 /* Router.swift in Sources */,
 				AC3187FE28009E2000D9BF30 /* CollectionViewCell.swift in Sources */,
 				AC3187EA27FF2AAF00D9BF30 /* ViewController.swift in Sources */,
+				AC31881D2804B52A00D9BF30 /* SettingsTableViewController.swift in Sources */,
 				AC31881428036C6800D9BF30 /* CustomSegmentedControl.swift in Sources */,
 				AC3188002800A1B800D9BF30 /* View.swift in Sources */,
 				AC3188092800A21700D9BF30 /* Model.swift in Sources */,
 				AC3188032800A1EC00D9BF30 /* Assembly.swift in Sources */,
 				AC3187FC280030B000D9BF30 /* Channel.swift in Sources */,
 				AC3187E627FF2AAF00D9BF30 /* AppDelegate.swift in Sources */,
+				AC31881728046B9C00D9BF30 /* DetailView.swift in Sources */,
 				AC3187E827FF2AAF00D9BF30 /* SceneDelegate.swift in Sources */,
+				AC31881B2804780C00D9BF30 /* DetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,9 +15,9 @@ final class Assembly {
         let presenter = Presenter(model: model, router: router)
         let controller = ViewController(presenter: presenter)
         
-        let targetController = DetailViewController(model: model)
+        let targetController = DetailViewController()
         
-        router.setRootController(controller: controller )
+        router.setRootController(controller: controller)
         router.setTargerController(controller: targetController)
         
         return controller
