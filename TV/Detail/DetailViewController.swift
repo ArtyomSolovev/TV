@@ -10,6 +10,9 @@ import AVFoundation
 
 protocol IDetailViewController: UIViewController {
     func setSelectedChannel(channel: Channel)
+    func updateVideo(quality: String)
+    var getQuality: ((String) -> Void)? {get set}
+    func setVideo(url: String)
 }
 
 final class DetailViewController: UIViewController {
@@ -18,6 +21,7 @@ final class DetailViewController: UIViewController {
     private let presenter: DetailPresenter
     private var player: AVPlayer!
     private var playerLaayer: AVPlayerLayer!
+    var getQuality: ((String) -> Void)?
     
     init(){
         self.viewDetail = DetailView(frame: UIScreen.main.bounds)
@@ -31,7 +35,10 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configurePlayer()
+//        self.getQuality = { [weak self] quality in
+//            self?.configurePlayer(urlInString: quality)
+//        }
+        self.configurePlayer(urlInString: self.viewDetail?.model?.getData().url ?? "")
         viewDetail?.configView()
     }
     
@@ -58,10 +65,10 @@ final class DetailViewController: UIViewController {
         player.pause()
     }
     
-    private func configurePlayer(){
+    private func configurePlayer(urlInString: String){
         guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/app_store/app-store-product-page/hls_vod_mvp.m3u8") else {return}//model.getData()[indexChannel ?? 0].url
+        print("sdf", urlInString)
         player = AVPlayer(url: url)
-        
         playerLaayer = AVPlayerLayer(player: player)
         playerLaayer.videoGravity = .resizeAspect
         
@@ -70,6 +77,17 @@ final class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: IDetailViewController{
+    
+    func updateVideo(quality: String) {
+        self.presenter.changeQualityController = { [weak self] qualityFromPresenter in
+            self?.configurePlayer(urlInString: quality)
+        }
+    }
+    
+    func setVideo(url: String) {
+        self.configurePlayer(urlInString: url)
+    }
+    
     func setSelectedChannel(channel: Channel) {
         self.presenter.setSelectedChannel(channel: channel)
     }

@@ -13,6 +13,7 @@ protocol IDetailView: UIView {
     func upadateData()
     func setPresenter(presenter: DetailPresenter, model: DetailModel, channel: Channel)
     var onTouchedSettings: ((SettingsTableViewController) -> Void)? { get set }
+    var changeQuality: ((String)->Void)? {get set}
 }
 
 protocol SettingsDelegate: AnyObject {
@@ -22,11 +23,12 @@ protocol SettingsDelegate: AnyObject {
 final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     
     private var presenter: DetailPresenter?
-    private var model: DetailModel?
+    var model: DetailModel?
     private let tableSettings = SettingsTableViewController()
     
     var onTouchedDismiss: (() -> Void)?
     var onTouchedSettings: ((SettingsTableViewController) -> Void)?
+    var changeQuality: ((String)->Void)?
     
     let videoView: UIView = {
         let videoView = UIView()
@@ -87,12 +89,6 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
         if let sheet = tableSettings.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-//        tableSettings.modalPresentationStyle = .popover
-//        let popOver = tableSettings.popoverPresentationController
-//        popOver?.delegate = self
-//        popOver?.sourceView = self.buttonSettings
-//        popOver?.sourceRect = CGRect(x: self.buttonSettings.bounds.midX, y: self.buttonSettings.bounds.midY, width: 0, height: 0)
-//        tableSettings.preferredContentSize = CGSize(width: 250, height: 250)
         self.onTouchedSettings?(tableSettings)
     }
     
@@ -180,6 +176,6 @@ extension DetailView: IDetailView{
 
 extension DetailView: SettingsDelegate{
     func update(settingsButton: String) {
-        print("Make raquest", settingsButton)
+        self.changeQuality?(settingsButton)
     }
 }

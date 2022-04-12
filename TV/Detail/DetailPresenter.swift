@@ -8,13 +8,19 @@
 protocol IDetailPresenter{
     func loadView(controller: DetailViewController, view: IDetailView)
     func setSelectedChannel(channel: Channel)
+    var changeQualityController: ((String) -> Void)? {get set}
 }
 
 final class DetailPresenter {
     
-    private let model = DetailModel()
+    private let modelDetail = DetailModel()
     private weak var controllerDetail: DetailViewController?
     private weak var viewDeatail: IDetailView?
+    var changeQualityController: ((String) -> Void)?
+    
+//    init() {
+//        controllerDetail?.getQuality(self.model.getData())
+//    }
     
     private func setHandlers(){
         viewDeatail?.onTouchedDismiss = {
@@ -25,18 +31,22 @@ final class DetailPresenter {
         viewDeatail?.onTouchedSettings = { [weak self] vc in
             self?.controllerDetail?.present(vc, animated: true)
         }
+        viewDeatail?.changeQuality = { [weak self] quality in
+            self?.changeQualityController?(quality)
+        }
+        controllerDetail?.updateVideo(quality: modelDetail.getData().url)
     }
 }
 
 extension DetailPresenter: IDetailPresenter {
     func setSelectedChannel(channel: Channel) {
-        self.model.setSelectedChannel(channel: channel)
+        self.modelDetail.setSelectedChannel(channel: channel)
     }
     
     func loadView(controller: DetailViewController, view: IDetailView) {
         self.controllerDetail = controller
         self.viewDeatail = view
-        self.viewDeatail?.setPresenter(presenter: self, model: model, channel: model.getData())
+        self.viewDeatail?.setPresenter(presenter: self, model: modelDetail, channel: modelDetail.getData())
         self.setHandlers()
     }
 }
