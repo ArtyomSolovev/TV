@@ -24,7 +24,6 @@ final class Model {
     
     init() {
         arrayOfIdFavorites = Favorites.instance.loadFavorites()
-        print("Downloud Favorites: ", arrayOfIdFavorites)
     }
 }
 

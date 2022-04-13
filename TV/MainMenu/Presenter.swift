@@ -26,7 +26,7 @@ final class Presenter {
     
     private func setHandlers(){
         view?.getNumberOfRowsHandler = { [weak self] type in
-            (self?.model.getData(typeOfData: type).count) ?? 0
+            self?.model.getData(typeOfData: type) ?? [Channel]()
         }
         view?.getContentForCellHandler = { [weak self] (type, index) in
             (self?.model.getData(typeOfData: type)[index])!
@@ -42,6 +42,9 @@ final class Presenter {
         }
         view?.isItFavorite = { [weak self] id in
             self?.model.contains(channelId: id) ?? false
+        }
+        view?.pushFilterChannel = { [weak self] channel in
+            self?.router.pushDetailVC(with: channel)
         }
     }
     

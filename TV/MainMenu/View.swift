@@ -8,25 +8,36 @@
 import UIKit
 
 protocol IView: UIView {
-    var getNumberOfRowsHandler: ((Int) -> Int)? { get set }
+    var getNumberOfRowsHandler: ((Int) -> [Channel])? { get set }
     var getContentForCellHandler: ((Int, Int) -> Channel)? { get set }
     var onTouchedHandler: ((Int, Int) -> Void)? { get set }
     var reloudData: (()->()){get}
     var getNumberOfFavorites: (() -> Int)? { get set }
     var addToFavorites: ((Int) -> Bool)? { get set }
     var isItFavorite: ((Int) -> Bool)? { get set }
+    var pushFilterChannel: ((Channel) -> Void)? { get set }
 }
 
 final class View: UIView {
     
     private var presenter: Presenter?
     private var favorites = [Int]()
-    var getNumberOfRowsHandler: ((Int) -> Int)?
+    var getNumberOfRowsHandler: ((Int) -> [Channel])?
     var getContentForCellHandler: ((Int, Int) -> Channel)?
     var onTouchedHandler: ((Int, Int) -> Void)?
     var getNumberOfFavorites: (() -> Int)?
     var addToFavorites: ((Int) -> Bool)?
     var isItFavorite: ((Int) -> Bool)?
+    var pushFilterChannel: ((Channel) -> Void)?
+    
+    private var filteredData: [Channel]?
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFilter: Bool {
+        return !searchBarIsEmpty
+    }
     
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -54,14 +65,9 @@ final class View: UIView {
     private let segmentedControl: CustomSegmentedControl = {
         let rect = CustomSegmentedControl(frame: CGRect(), buttonTitle: ["Все", "Избранные"])
         rect.backgroundColor = UIColor(hex: "#373740")
-//        rect.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         rect.translatesAutoresizingMaskIntoConstraints = false
         return rect
     }()
-    
-//    @objc private func buttonAction(sender: UIButton!) {
-//        self.onTouchedDismiss?()
-//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,6 +80,7 @@ final class View: UIView {
     }
     
     fileprivate func setUpSearchBar() {
+        self.searchBar.delegate = self
         let topPadding = UIApplication.shared.windows.first!.safeAreaInsets.top
         self.searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: topPadding).isActive = true
         self.searchBar.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
@@ -116,30 +123,43 @@ extension View: IView {
 
 extension View: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.onTouchedHandler?(segmentedControl.selectedIndex, indexPath.item)
+        if isFilter {
+            self.pushFilterChannel?((self.filteredData?[indexPath.item])!)
+        } else {
+            self.onTouchedHandler?(segmentedControl.selectedIndex, indexPath.item)
+        }
     }
 }
 
 extension View: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.getNumberOfRowsHandler?(segmentedControl.selectedIndex) ?? 0
+        if isFilter {
+            return filteredData?.count ?? 0
+        } else {
+            return self.getNumberOfRowsHandler?(segmentedControl.selectedIndex).count ?? 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if segmentedControl.selectedIndex == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.id, for: indexPath) as! CollectionViewCell
+        if isFilter {
+            if let channel = self.filteredData?[indexPath.row] {
+                cell.delegate = self
+                cell.setChannel(channel: channel)
+                let favorite = self.isItFavorite?(channel.id) ?? false
+                cell.setFavoritesIcon(change: favorite)
+            }
+        } else {
             if let channel = self.getContentForCellHandler?(segmentedControl.selectedIndex, indexPath.row) {
                 cell.delegate = self
                 cell.setChannel(channel: channel)
                 let favorite = self.isItFavorite?(channel.id) ?? false
                 cell.setFavoritesIcon(change: favorite)
             }
+        }
             return cell
-//        }
-        
     }
-    
 }
 
 extension View: CollectionViewCellDelegate{
@@ -152,6 +172,16 @@ extension View: CollectionViewCellDelegate{
 
 extension View: CustomSegmentedControlDelegate{
     func change(to index: Int) {
+        self.collectionView.reloadData()
+    }
+}
+
+extension View: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let data = self.getNumberOfRowsHandler?(segmentedControl.selectedIndex)
+        filteredData = searchText.isEmpty ? data : data?.filter { (item: Channel) -> Bool in
+            return item.nameRu.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
         self.collectionView.reloadData()
     }
 }
