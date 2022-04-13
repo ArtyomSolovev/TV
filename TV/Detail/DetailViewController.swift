@@ -12,14 +12,14 @@ protocol IDetailViewController: UIViewController {
     func setSelectedChannel(channel: Channel)
     func updateVideo(quality: String)
     var getQuality: ((String) -> Void)? {get set}
-    func setVideo(url: String)
+//    func setVideo(url: String)
 }
 
 final class DetailViewController: UIViewController {
     
     private var viewDetail: DetailView?
     private let presenter: DetailPresenter
-    private var player: AVPlayer!
+    private var player = AVPlayer()
     private var playerLaayer: AVPlayerLayer!
     var getQuality: ((String) -> Void)?
     
@@ -35,11 +35,8 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.getQuality = { [weak self] quality in
-//            self?.configurePlayer(urlInString: quality)
-//        }
-        self.configurePlayer(urlInString: self.viewDetail?.model?.getData().url ?? "")
-        viewDetail?.configView()
+        self.createPlayer()
+        self.viewDetail?.configView()
     }
     
     override func loadView() {
@@ -66,12 +63,14 @@ final class DetailViewController: UIViewController {
     }
     
     private func configurePlayer(urlInString: String){
-        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/app_store/app-store-product-page/hls_vod_mvp.m3u8") else {return}//model.getData()[indexChannel ?? 0].url
-        print("sdf", urlInString)
-        player = AVPlayer(url: url)
+        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/app_store/app-store-product-page/hls_vod_mvp.m3u8") else {return}
+        print("urlForPresent", urlInString)
+        player.replaceCurrentItem(with: AVPlayerItem(url: url))
+    }
+    
+    private func createPlayer(){
         playerLaayer = AVPlayerLayer(player: player)
         playerLaayer.videoGravity = .resizeAspect
-        
         viewDetail?.videoView.layer.addSublayer(playerLaayer)
     }
 }
@@ -79,13 +78,7 @@ final class DetailViewController: UIViewController {
 extension DetailViewController: IDetailViewController{
     
     func updateVideo(quality: String) {
-        self.presenter.changeQualityController = { [weak self] qualityFromPresenter in
-            self?.configurePlayer(urlInString: quality)
-        }
-    }
-    
-    func setVideo(url: String) {
-        self.configurePlayer(urlInString: url)
+        self.configurePlayer(urlInString: quality)
     }
     
     func setSelectedChannel(channel: Channel) {
