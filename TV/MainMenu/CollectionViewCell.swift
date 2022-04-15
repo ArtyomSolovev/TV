@@ -30,7 +30,7 @@ final class CollectionViewCell: UICollectionViewCell {
     private var imageIcon : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: Constants.NameImage.starIcon), for: .normal)
-        button.addTarget(CollectionViewCell.self, action: #selector(addToFavorites), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

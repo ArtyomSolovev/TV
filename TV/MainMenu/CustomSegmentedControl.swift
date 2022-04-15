@@ -16,7 +16,7 @@ final class CustomSegmentedControl: UIView {
     private var buttons: [UIButton]!
     private var selectorView: UIView!
     
-    private var textColor = UIColor(hex: Constants.SystemColor.grey)
+    private var textColor = UIColor(hex: Constants.SystemColor.greyForSegmetVC)
     private var selectorViewColor = UIColor(hex: Constants.SystemColor.blue)
     private var selectorTextColor = UIColor(hex: Constants.SystemColor.white)
     

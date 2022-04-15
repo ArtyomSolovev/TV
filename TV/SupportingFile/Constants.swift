@@ -35,6 +35,7 @@ enum Constants {
     
     enum SystemColor {
         static let grey = "#373740"
+        static let greyForSegmetVC = "#828282"
         static let darkGrey = "#373740"
         static let blue = "#115CFF"
         static let lightGrey = "#939699"
