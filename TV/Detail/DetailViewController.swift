@@ -32,12 +32,6 @@ final class DetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.createPlayer()
-        self.viewDetail?.configView()
-    }
-    
     override func loadView() {
         super.loadView()
         if let customView = viewDetail {
@@ -45,39 +39,40 @@ final class DetailViewController: UIViewController {
         }
         self.presenter.loadView(controller: self, view: self.viewDetail!)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.createPlayer()
+        self.viewDetail?.configView()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
-//        player.play()
-        viewDetail?.upadateData()
+        self.viewDetail?.upadateData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        playerLaayer.frame = self.viewDetail?.videoView.bounds ?? CGRect()
+        self.playerLaayer.frame = self.viewDetail?.videoView.bounds ?? CGRect()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        player.pause()
+        self.player.pause()
     }
     
-    private var url: String?
-    
     private func configurePlayer(urlInString: String){
-//        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/app_store/app-store-product-page/hls_vod_mvp.m3u8") else {return}
         guard let url = URL(string: urlInString) else {
             print("url failed", urlInString)
             return}
         print("url:", urlInString)
         self.player.replaceCurrentItem(with: AVPlayerItem(url: url))
-        player.play()
-        
+        self.player.play()
     }
     
     private func createPlayer(){
-        playerLaayer = AVPlayerLayer(player: player)
-        playerLaayer.videoGravity = .resizeAspect
-        viewDetail?.videoView.layer.addSublayer(playerLaayer)
+        self.playerLaayer = AVPlayerLayer(player: self.player)
+        self.playerLaayer.videoGravity = .resizeAspect
+        self.viewDetail?.videoView.layer.addSublayer(self.playerLaayer)
     }
 }
 

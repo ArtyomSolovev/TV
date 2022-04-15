@@ -23,7 +23,7 @@ protocol SettingsDelegate: AnyObject {
 final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     
     private var presenter: DetailPresenter?
-    var model: DetailModel?
+    private var model: DetailModel?
     private let tableSettings = SettingsTableViewController()
     
     var onTouchedDismiss: (() -> Void)?
@@ -33,7 +33,7 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     let videoView: UIView = {
         let videoView = UIView()
         videoView.translatesAutoresizingMaskIntoConstraints = false
-        videoView.backgroundColor = UIColor(hex: "#373740")
+        videoView.backgroundColor = UIColor(hex: Constants.SystemColor.grey)
         return videoView
     }()
     
@@ -45,7 +45,7 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     
     private let buttonBack: UIButton = {
         let buttonBack = UIButton()
-        buttonBack.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
+        buttonBack.setImage(UIImage(systemName: Constants.NameImage.buttonBack), for: .normal)
         buttonBack.translatesAutoresizingMaskIntoConstraints = false
         buttonBack.tintColor = .white
         buttonBack.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
@@ -77,7 +77,7 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     
     private var buttonSettings : UIButton = {
         let buttonSettings = UIButton()
-        buttonSettings.setImage(UIImage(systemName: "gearshape"), for: .normal)
+        buttonSettings.setImage(UIImage(systemName: Constants.NameImage.buttonSettings ), for: .normal)
         buttonSettings.tintColor = .white
         buttonSettings.translatesAutoresizingMaskIntoConstraints = false
         buttonSettings.addTarget(self, action: #selector(buttonSettingsAction), for: .touchUpInside)
@@ -94,10 +94,10 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     
     func configView() {
         self.backgroundColor = .tintColor
-        setUpVideoView()
-        configureStackView()
-        setButtonSettings()
-        upadateData()
+        self.setUpVideoView()
+        self.configureStackView()
+        self.setButtonSettings()
+        self.upadateData()
     }
         
     fileprivate func setUpVideoView() {
@@ -117,8 +117,7 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     private func configureStackView(){
         
         self.addSubview(mainTitleView)
-        let topPadding = UIApplication.shared.windows.first!.safeAreaInsets.top
-        self.mainTitleView.topAnchor.constraint(equalTo: self.topAnchor, constant: topPadding).isActive = true
+        self.mainTitleView.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.topPadding).isActive = true
         self.mainTitleView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         self.mainTitleView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.mainTitleView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
@@ -130,21 +129,21 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
         view.addArrangedSubview(self.titleLabel)
         view.addArrangedSubview(self.nameLabel)
         
-        mainTitleView.addSubview(self.buttonBack)
-        self.buttonBack.topAnchor.constraint(equalTo: mainTitleView.topAnchor).isActive = true
-        self.buttonBack.leftAnchor.constraint(equalTo: mainTitleView.leftAnchor).isActive = true
+        self.mainTitleView.addSubview(self.buttonBack)
+        self.buttonBack.topAnchor.constraint(equalTo: self.mainTitleView.topAnchor).isActive = true
+        self.buttonBack.leftAnchor.constraint(equalTo: self.mainTitleView.leftAnchor).isActive = true
         self.buttonBack.widthAnchor.constraint(equalToConstant: 44).isActive = true
         self.buttonBack.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        mainTitleView.addSubview(imageView)
-        imageView.leftAnchor.constraint(equalTo: buttonBack.rightAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: mainTitleView.topAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        self.mainTitleView.addSubview(self.imageView)
+        self.imageView.leftAnchor.constraint(equalTo: self.buttonBack.rightAnchor).isActive = true
+        self.imageView.topAnchor.constraint(equalTo: self.mainTitleView.topAnchor).isActive = true
+        self.imageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        self.imageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        mainTitleView.addSubview(view)
-        view.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 24).isActive = true
-        view.rightAnchor.constraint(equalTo: mainTitleView.rightAnchor).isActive = true
+        self.mainTitleView.addSubview(view)
+        view.leftAnchor.constraint(equalTo: self.imageView.rightAnchor, constant: 24).isActive = true
+        view.rightAnchor.constraint(equalTo: self.mainTitleView.rightAnchor).isActive = true
         view.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
 }

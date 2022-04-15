@@ -16,7 +16,7 @@ final class CollectionViewCell: UICollectionViewCell {
     weak var delegate: CollectionViewCellDelegate?
     private var dataProvider = DataProvider()
     
-    static let id = "CollectionViewCell"
+    static let id = Constants.ID.cellId
     private var idOfChannel: Int?
 
     private var imageView : UIImageView = {
@@ -29,8 +29,8 @@ final class CollectionViewCell: UICollectionViewCell {
     
     private var imageIcon : UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        button.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        button.setImage(UIImage(systemName: Constants.NameImage.starIcon), for: .normal)
+        button.addTarget(CollectionViewCell.self, action: #selector(addToFavorites), for: .touchUpInside)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -59,7 +59,7 @@ final class CollectionViewCell: UICollectionViewCell {
     
     func setChannel(channel: Channel){
         guard let url = URL(string: channel.image) else {return}
-        dataProvider.downloadImage(url: url) { image in
+        self.dataProvider.downloadImage(url: url) { image in
             self.imageView.image = image
         }
         self.nameLabel.text = channel.nameRu
@@ -70,11 +70,12 @@ final class CollectionViewCell: UICollectionViewCell {
         } else {
             print(channel.nameRu, "Fail")
         }
-        self.backgroundColor = UIColor(hex: "#373740")
+        self.backgroundColor = UIColor(hex: Constants.SystemColor.grey)
     }
     
     func setFavoritesIcon(change: Bool) {
-        self.imageIcon.imageView?.tintColor = change ?  UIColor(hex: "#115CFF") : UIColor(hex: "#939699")
+        self.imageIcon.imageView?.tintColor = change ?  UIColor(hex: Constants
+            .SystemColor.blue) : UIColor(hex: Constants.SystemColor.lightGrey)
     }
     
     override var isHighlighted: Bool {
@@ -101,40 +102,40 @@ final class CollectionViewCell: UICollectionViewCell {
         self.addSubview(imageIcon)
         self.addSubview(nameLabel)
         self.addSubview(broadcastLabel)
-        setupPhoto()
-        setupImageIcon()
-        setupName()
-        setupPlace()
+        self.setupPhoto()
+        self.setupImageIcon()
+        self.setupName()
+        self.setupPlace()
     }
     
     private func setupPhoto() {
-        imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        self.imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        self.imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        self.imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     
     private func setupImageIcon(){
-        imageIcon.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        imageIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        imageIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        imageIcon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        self.imageIcon.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        self.imageIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        self.imageIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        self.imageIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     
     private func setupName(){
-        nameLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 16).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: imageIcon.leftAnchor).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 14).isActive = true
+        self.nameLabel.leftAnchor.constraint(equalTo: self.imageView.rightAnchor, constant: 16).isActive = true
+        self.nameLabel.rightAnchor.constraint(equalTo: self.imageIcon.leftAnchor).isActive = true
+        self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 14).isActive = true
     }
     
     private func setupPlace(){
-        broadcastLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 16).isActive = true
-        broadcastLabel.rightAnchor.constraint(equalTo: imageIcon.leftAnchor).isActive = true
-        broadcastLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
+        self.broadcastLabel.leftAnchor.constraint(equalTo: self.imageView.rightAnchor, constant: 16).isActive = true
+        self.broadcastLabel.rightAnchor.constraint(equalTo: self.imageIcon.leftAnchor).isActive = true
+        self.broadcastLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 8).isActive = true
     }
     
     private func configureLayer() {
-        layer.cornerRadius = 10
+        self.layer.cornerRadius = 10
     }
     
 }

@@ -21,29 +21,29 @@ final class Presenter {
     init(model: IModel, router: IRouter) {
         self.model = model
         self.router = router as! Router
-        loadData()
+        self.loadData()
     }
     
     private func setHandlers(){
-        view?.getNumberOfRowsHandler = { [weak self] type in
+        self.view?.getNumberOfRowsHandler = { [weak self] type in
             self?.model.getData(typeOfData: type) ?? [Channel]()
         }
-        view?.getContentForCellHandler = { [weak self] (type, index) in
+        self.view?.getContentForCellHandler = { [weak self] (type, index) in
             (self?.model.getData(typeOfData: type)[index])!
         }
-        view?.onTouchedHandler = { [weak self] (type, index) in
+        self.view?.onTouchedHandler = { [weak self] (type, index) in
             self?.router.pushDetailVC(with: (self?.model.getData(typeOfData: type)[index])!)
         }
-        view?.getNumberOfFavorites = { [weak self] in
+        self.view?.getNumberOfFavorites = { [weak self] in
             self?.model.getFavoritesCountChannels() ?? 0
         }
-        view?.addToFavorites = { [weak self] id in
+        self.view?.addToFavorites = { [weak self] id in
             self?.model.changeStateOfFavorites(channelId: id) ?? false
         }
-        view?.isItFavorite = { [weak self] id in
+        self.view?.isItFavorite = { [weak self] id in
             self?.model.contains(channelId: id) ?? false
         }
-        view?.pushFilterChannel = { [weak self] channel in
+        self.view?.pushFilterChannel = { [weak self] channel in
             self?.router.pushDetailVC(with: channel)
         }
     }

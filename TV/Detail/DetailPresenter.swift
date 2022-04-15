@@ -17,27 +17,27 @@ final class DetailPresenter {
     private weak var viewDeatail: IDetailView?
     
     private func setHandlers(){
-        viewDeatail?.onTouchedDismiss = {
+        self.viewDeatail?.onTouchedDismiss = {
             self.controllerDetail?.dismiss(animated: true, completion: nil)
         }
-        viewDeatail?.onTouchedSettings = { [weak self] vc in
+        self.viewDeatail?.onTouchedSettings = { [weak self] vc in
             self?.controllerDetail?.present(vc, animated: true)
         }
-        viewDeatail?.changeQuality = { [weak self] quality in
+        self.viewDeatail?.changeQuality = { [weak self] quality in
             var fullUrlQuality: String
             switch quality {
-            case "360":
-                fullUrlQuality = (self?.modelDetail.getData().url)!.replacingOccurrences(of: "index.m3u8", with: "tracks-v1a1/mono.m3u8")
-            case "480":
-                fullUrlQuality = (self?.modelDetail.getData().url)!.replacingOccurrences(of: "index.m3u8", with: "tracks-v2a1/mono.m3u8")
-            case "720":
-                fullUrlQuality = (self?.modelDetail.getData().url)!.replacingOccurrences(of: "index.m3u8", with: "tracks-v3a1/mono.m3u8")
+            case Constants.WorkWithURL.lowQuality.numbers:
+                fullUrlQuality = (self?.modelDetail.getData().url)!.replacingOccurrences(of: Constants.WorkWithURL.standart, with: Constants.WorkWithURL.lowQuality.urlEnd)
+            case Constants.WorkWithURL.middleQuality.numbers:
+                fullUrlQuality = (self?.modelDetail.getData().url)!.replacingOccurrences(of: Constants.WorkWithURL.standart, with: Constants.WorkWithURL.middleQuality.urlEnd)
+            case Constants.WorkWithURL.highQuality.numbers:
+                fullUrlQuality = (self?.modelDetail.getData().url)!.replacingOccurrences(of: Constants.WorkWithURL.standart, with: Constants.WorkWithURL.highQuality.urlEnd)
             default:
                 fullUrlQuality = (self?.modelDetail.getData().url)!
             }
             self?.controllerDetail?.updateVideo(quality: fullUrlQuality)
         }
-        controllerDetail?.updateVideo(quality: self.modelDetail.getData().url)
+        self.controllerDetail?.updateVideo(quality: self.modelDetail.getData().url)
     }
 }
 

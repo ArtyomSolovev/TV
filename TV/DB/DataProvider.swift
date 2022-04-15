@@ -13,7 +13,7 @@ final class DataProvider {
     
     func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         
-        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+        if let cachedImage = self.imageCache.object(forKey: url.absoluteString as NSString) {
             completion(cachedImage)
         } else {
             let request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)

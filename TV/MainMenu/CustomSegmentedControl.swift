@@ -11,14 +11,14 @@ protocol CustomSegmentedControlDelegate: AnyObject {
     func change(to index:Int)
 }
 
-class CustomSegmentedControl: UIView {
+final class CustomSegmentedControl: UIView {
     private var buttonTitles:[String]!
     private var buttons: [UIButton]!
     private var selectorView: UIView!
     
-    var textColor = UIColor(hex: "#828282")
-    var selectorViewColor = UIColor(hex: "#125CFF")
-    var selectorTextColor = UIColor(hex: "#F0F0F0")
+    private var textColor = UIColor(hex: Constants.SystemColor.grey)
+    private var selectorViewColor = UIColor(hex: Constants.SystemColor.blue)
+    private var selectorTextColor = UIColor(hex: Constants.SystemColor.white)
     
     weak var delegate:CustomSegmentedControlDelegate?
     
@@ -31,20 +31,20 @@ class CustomSegmentedControl: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        updateView()
+        self.updateView()
     }
     
-    func setButtonTitles(buttonTitles:[String]) {
+    private func setButtonTitles(buttonTitles:[String]) {
         self.buttonTitles = buttonTitles
         self.updateView()
     }
     
-    func setIndex(index:Int) {
-        buttons.forEach({ $0.setTitleColor(textColor, for: .normal) })
+    private func setIndex(index:Int) {
+        self.buttons.forEach({ $0.setTitleColor(textColor, for: .normal) })
         let button = buttons[index]
-        selectedIndex = index
-        button.setTitleColor(selectorTextColor, for: .normal)
-        let selectorPosition = frame.width/CGFloat(buttonTitles.count) * CGFloat(index)
+        self.selectedIndex = index
+        button.setTitleColor(self.selectorTextColor, for: .normal)
+        let selectorPosition = frame.width/CGFloat(self.buttonTitles.count) * CGFloat(index)
         UIView.animate(withDuration: 0.2) {
             self.selectorView.frame.origin.x = selectorPosition
         }
@@ -66,12 +66,13 @@ class CustomSegmentedControl: UIView {
     }
 }
 
-//Configuration View
+//MARK: - Configuration View
+
 extension CustomSegmentedControl {
     private func updateView() {
-        createButton()
-        configSelectorView()
-        configStackView()
+        self.createButton()
+        self.configSelectorView()
+        self.configStackView()
     }
     
     private func configStackView() {
@@ -89,14 +90,14 @@ extension CustomSegmentedControl {
     
     private func configSelectorView() {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count)
-        selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: -2))
-        selectorView.backgroundColor = selectorViewColor
-        addSubview(selectorView)
+        self.selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: -2))
+        self.selectorView.backgroundColor = self.selectorViewColor
+        addSubview(self.selectorView)
     }
     
     private func createButton() {
-        buttons = [UIButton]()
-        buttons.removeAll()
+        self.buttons = [UIButton]()
+        self.buttons.removeAll()
         subviews.forEach({$0.removeFromSuperview()})
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
@@ -105,7 +106,7 @@ extension CustomSegmentedControl {
             button.setTitleColor(textColor, for: .normal)
             buttons.append(button)
         }
-        buttons[0].setTitleColor(selectorTextColor, for: .normal)
+        self.buttons[0].setTitleColor(selectorTextColor, for: .normal)
     }
     
     

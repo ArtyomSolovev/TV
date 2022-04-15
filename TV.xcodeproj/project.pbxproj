@@ -29,6 +29,7 @@
 		AC31881D2804B52A00D9BF30 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */; };
 		AC31881F2805619500D9BF30 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881E2805619500D9BF30 /* Favorites.swift */; };
 		AC3188212805D93200D9BF30 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3188202805D93200D9BF30 /* DataProvider.swift */; };
+		AC77E1072809A19B00DCA11B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC77E1062809A19B00DCA11B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		AC31881E2805619500D9BF30 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		AC3188202805D93200D9BF30 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		AC77E1062809A19B00DCA11B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,18 +90,11 @@
 		AC3187E427FF2AAF00D9BF30 /* TV */ = {
 			isa = PBXGroup;
 			children = (
-				AC3187E527FF2AAF00D9BF30 /* AppDelegate.swift */,
-				AC3187E727FF2AAF00D9BF30 /* SceneDelegate.swift */,
 				AC3188012800A1BD00D9BF30 /* MainMenu */,
 				AC31880A2800A24100D9BF30 /* Detail */,
-				AC3187FB280030AF00D9BF30 /* Channel.swift */,
-				AC3188112800C2E100D9BF30 /* Extention.swift */,
-				AC31881E2805619500D9BF30 /* Favorites.swift */,
-				AC31880D2800AF6D00D9BF30 /* Network.swift */,
-				AC3188202805D93200D9BF30 /* DataProvider.swift */,
-				AC3187EE27FF2AB000D9BF30 /* Assets.xcassets */,
-				AC3187F027FF2AB000D9BF30 /* LaunchScreen.storyboard */,
-				AC3187F327FF2AB000D9BF30 /* Info.plist */,
+				AC77E10428099B7F00DCA11B /* Network */,
+				AC77E10328099B6300DCA11B /* DB */,
+				AC77E10528099BAE00DCA11B /* SupportingFile */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -129,6 +124,38 @@
 				AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		AC77E10328099B6300DCA11B /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				AC31881E2805619500D9BF30 /* Favorites.swift */,
+				AC3188202805D93200D9BF30 /* DataProvider.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		AC77E10428099B7F00DCA11B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AC31880D2800AF6D00D9BF30 /* Network.swift */,
+				AC3187FB280030AF00D9BF30 /* Channel.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AC77E10528099BAE00DCA11B /* SupportingFile */ = {
+			isa = PBXGroup;
+			children = (
+				AC3187E527FF2AAF00D9BF30 /* AppDelegate.swift */,
+				AC3187E727FF2AAF00D9BF30 /* SceneDelegate.swift */,
+				AC3188112800C2E100D9BF30 /* Extention.swift */,
+				AC77E1062809A19B00DCA11B /* Constants.swift */,
+				AC3187EE27FF2AB000D9BF30 /* Assets.xcassets */,
+				AC3187F027FF2AB000D9BF30 /* LaunchScreen.storyboard */,
+				AC3187F327FF2AB000D9BF30 /* Info.plist */,
+			);
+			path = SupportingFile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +239,7 @@
 				AC3187FE28009E2000D9BF30 /* CollectionViewCell.swift in Sources */,
 				AC3187EA27FF2AAF00D9BF30 /* ViewController.swift in Sources */,
 				AC31881D2804B52A00D9BF30 /* SettingsTableViewController.swift in Sources */,
+				AC77E1072809A19B00DCA11B /* Constants.swift in Sources */,
 				AC31881428036C6800D9BF30 /* CustomSegmentedControl.swift in Sources */,
 				AC3188002800A1B800D9BF30 /* View.swift in Sources */,
 				AC3188092800A21700D9BF30 /* Model.swift in Sources */,
@@ -361,7 +389,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RWNR5M53QM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TV/Info.plist;
+				INFOPLIST_FILE = TV/SupportingFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight";
@@ -389,7 +417,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RWNR5M53QM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TV/Info.plist;
+				INFOPLIST_FILE = TV/SupportingFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight";

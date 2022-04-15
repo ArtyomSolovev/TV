@@ -27,7 +27,7 @@ final class NetworkService: INetworkService
 
     func loadData<T: Decodable>(completion: @escaping (Result<T, Error>) -> Void) {
         
-        guard let url = URL(string: "https://limehd.online/playlist/") else { fatalError("Сообщение") }
+        guard let url = URL(string: Constants.URL) else { fatalError("Error") }
 
         let request = URLRequest(url: url)
         self.session.dataTask(with: request) { data, response, error in
@@ -37,7 +37,6 @@ final class NetworkService: INetworkService
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(T.self, from: data)
-//                    print("[NETWORK] \(response)")
                     completion(.success(result))
                 }
                 catch {

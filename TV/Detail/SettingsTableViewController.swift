@@ -9,14 +9,14 @@ import UIKit
 
 final class SettingsTableViewController: UITableViewController {
     
-    private let quality = ["360", "480", "720"]
+    private let quality = [Constants.WorkWithURL.lowQuality.numbers, Constants.WorkWithURL.middleQuality.numbers, Constants.WorkWithURL.highQuality.numbers]
     
     weak var settingsDelegate: SettingsDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.isScrollEnabled = false
-        self.view.backgroundColor = UIColor(hex: "#373740")
+        self.view.backgroundColor = UIColor(hex: Constants.SystemColor.grey)
     }
 
     override func viewWillLayoutSubviews() {
@@ -30,14 +30,14 @@ final class SettingsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        quality.count
+        self.quality.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
 
-        cell.textLabel?.text = quality[indexPath.row]
-        cell.backgroundColor = UIColor(hex: "#373740")
+        cell.textLabel?.text = self.quality[indexPath.row]
+        cell.backgroundColor = UIColor(hex: Constants.SystemColor.grey)
         cell.textLabel?.textColor = .white
 
         return cell

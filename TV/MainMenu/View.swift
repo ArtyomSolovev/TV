@@ -41,8 +41,8 @@ final class View: UIView {
     
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.barTintColor = UIColor(hex: "#373740")
-        searchBar.placeholder = " Напишите название телеканала"
+        searchBar.barTintColor = UIColor(hex: Constants.SystemColor.grey)
+        searchBar.placeholder = Constants.PlaceHolder.searchBar
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
@@ -58,13 +58,13 @@ final class View: UIView {
         view.alwaysBounceVertical = true
         view.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.id)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(hex: "#262729")
+        view.backgroundColor = UIColor(hex: Constants.SystemColor.darkGrey)
         return view
     }()
     
     private let segmentedControl: CustomSegmentedControl = {
-        let rect = CustomSegmentedControl(frame: CGRect(), buttonTitle: ["Все", "Избранные"])
-        rect.backgroundColor = UIColor(hex: "#373740")
+        let rect = CustomSegmentedControl(frame: CGRect(), buttonTitle: [Constants.PlaceHolder.Button.all, Constants.PlaceHolder.Button.favorites])
+        rect.backgroundColor = UIColor(hex: Constants.SystemColor.grey)
         rect.translatesAutoresizingMaskIntoConstraints = false
         return rect
     }()
@@ -72,7 +72,7 @@ final class View: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configure()
-        self.backgroundColor = UIColor(hex: "#373740")
+        self.backgroundColor = UIColor(hex: Constants.SystemColor.grey)
     }
     
     required init?(coder: NSCoder) {
@@ -81,11 +81,9 @@ final class View: UIView {
     
     fileprivate func setUpSearchBar() {
         self.searchBar.delegate = self
-        let topPadding = UIApplication.shared.windows.first!.safeAreaInsets.top
-        self.searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: topPadding).isActive = true
+        self.searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.topPadding).isActive = true
         self.searchBar.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         self.searchBar.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-//        self.searchBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     fileprivate func setUpSegmentedControl() {
@@ -93,7 +91,7 @@ final class View: UIView {
         self.segmentedControl.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor).isActive = true
         self.segmentedControl.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         self.segmentedControl.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.segmentedControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.07).isActive = true
+        self.segmentedControl.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.07).isActive = true
     }
     
     fileprivate func setUpCollectionView() {
@@ -109,9 +107,9 @@ final class View: UIView {
         self.addSubview(self.searchBar)
         self.addSubview(self.segmentedControl)
         self.addSubview(self.collectionView)
-        setUpSearchBar()
-        setUpSegmentedControl()
-        setUpCollectionView()
+        self.setUpSearchBar()
+        self.setUpSegmentedControl()
+        self.setUpCollectionView()
     }
 }
 
@@ -126,7 +124,7 @@ extension View: UICollectionViewDelegate {
         if isFilter {
             self.pushFilterChannel?((self.filteredData?[indexPath.item])!)
         } else {
-            self.onTouchedHandler?(segmentedControl.selectedIndex, indexPath.item)
+            self.onTouchedHandler?(self.segmentedControl.selectedIndex, indexPath.item)
         }
     }
 }
@@ -134,8 +132,8 @@ extension View: UICollectionViewDelegate {
 extension View: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isFilter {
-            return filteredData?.count ?? 0
+        if self.isFilter {
+            return self.filteredData?.count ?? 0
         } else {
             return self.getNumberOfRowsHandler?(segmentedControl.selectedIndex).count ?? 0
         }
@@ -143,7 +141,7 @@ extension View: UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.id, for: indexPath) as! CollectionViewCell
-        if isFilter {
+        if self.isFilter {
             if let channel = self.filteredData?[indexPath.row] {
                 cell.delegate = self
                 cell.setChannel(channel: channel)

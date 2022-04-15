@@ -22,7 +22,7 @@ extension DetailModel: IDetailModel {
     }
     
     func getData() -> Channel{
-        return channel!
+        return self.channel!
     }
     
 }

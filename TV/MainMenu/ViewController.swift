@@ -29,11 +29,11 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        viewChoose.frame = self.view.bounds 
+        self.viewChoose.frame = self.view.bounds 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.view.addSubview(viewChoose)
+        self.view.addSubview(self.viewChoose)
     }
 
 }

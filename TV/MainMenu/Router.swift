@@ -34,7 +34,6 @@ extension Router: IRouter {
         }
         targetController.modalPresentationStyle = .fullScreen
         targetController.setSelectedChannel(channel: channel)
-//        self.controller?.navigationController?.pushViewController(targetController, animated: false)
         self.controller?.present(targetController, animated: true)
     }
 }
