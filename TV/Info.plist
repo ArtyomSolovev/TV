@@ -16,9 +16,9 @@
 				<dict>
 					<key>UISceneClassName</key>
 					<string></string>
-					<key>UISceneDelegateClassName</key>
-					<string></string>
 					<key>UISceneConfigurationName</key>
+					<string></string>
+					<key>UISceneDelegateClassName</key>
 					<string></string>
 					<key>UISceneStoryboardFile</key>
 					<string></string>

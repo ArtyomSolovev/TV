@@ -19,8 +19,6 @@ final class DetailPresenter {
     private func setHandlers(){
         viewDeatail?.onTouchedDismiss = {
             self.controllerDetail?.dismiss(animated: true, completion: nil)
-//            self.controllerDetail?.viewDidLayoutSubviews()//?
-//            self.viewDeatail?.layoutIfNeeded()//?
         }
         viewDeatail?.onTouchedSettings = { [weak self] vc in
             self?.controllerDetail?.present(vc, animated: true)
