@@ -65,6 +65,11 @@ final class CollectionViewCell: UICollectionViewCell {
         self.nameLabel.text = channel.nameRu
         self.broadcastLabel.text = channel.current?.title
         self.idOfChannel = channel.id
+        if channel.url != "" {
+            print(channel.nameRu, "", channel.url)
+        } else {
+            print(channel.nameRu, "Fail")
+        }
         self.backgroundColor = UIColor(hex: "#373740")
     }
     

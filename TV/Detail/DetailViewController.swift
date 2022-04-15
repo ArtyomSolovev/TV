@@ -12,7 +12,6 @@ protocol IDetailViewController: UIViewController {
     func setSelectedChannel(channel: Channel)
     func updateVideo(quality: String)
     var getQuality: ((String) -> Void)? {get set}
-//    func setVideo(url: String)
 }
 
 final class DetailViewController: UIViewController {
@@ -48,7 +47,7 @@ final class DetailViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        player.play()
+//        player.play()
         viewDetail?.upadateData()
     }
     
@@ -62,10 +61,17 @@ final class DetailViewController: UIViewController {
         player.pause()
     }
     
+    private var url: String?
+    
     private func configurePlayer(urlInString: String){
-        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/app_store/app-store-product-page/hls_vod_mvp.m3u8") else {return}
-        print("urlForPresent", urlInString)
-        player.replaceCurrentItem(with: AVPlayerItem(url: url))
+//        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/app_store/app-store-product-page/hls_vod_mvp.m3u8") else {return}
+        guard let url = URL(string: urlInString) else {
+            print("url failed", urlInString)
+            return}
+        print("url:", urlInString)
+        self.player.replaceCurrentItem(with: AVPlayerItem(url: url))
+        player.play()
+        
     }
     
     private func createPlayer(){

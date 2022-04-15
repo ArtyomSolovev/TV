@@ -41,8 +41,7 @@ struct Channel: Codable {
     let id: Int
     let epgID: Int?
     let nameRu, nameEn: String
-    let cdn: String
-    let url: String
+    let cdn, url: String
     let address: String
     let urlArchive: String
     let urlSound: String
@@ -399,4 +398,3 @@ class JSONAny: Codable {
         }
     }
 }
-			

@@ -29,13 +29,9 @@
 		AC31881D2804B52A00D9BF30 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881C2804B52A00D9BF30 /* SettingsTableViewController.swift */; };
 		AC31881F2805619500D9BF30 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC31881E2805619500D9BF30 /* Favorites.swift */; };
 		AC3188212805D93200D9BF30 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3188202805D93200D9BF30 /* DataProvider.swift */; };
-		DA37E0664D3A5EDAA1C50564 /* Pods_TV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA4BEF8CB0B959FD38CC91B /* Pods_TV.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0CA4BEF8CB0B959FD38CC91B /* Pods_TV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D8E3733590518A4DEFE080A /* Pods-TV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV.release.xcconfig"; path = "Target Support Files/Pods-TV/Pods-TV.release.xcconfig"; sourceTree = "<group>"; };
-		88E1D71417DE733E1C41C565 /* Pods-TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV.debug.xcconfig"; path = "Target Support Files/Pods-TV/Pods-TV.debug.xcconfig"; sourceTree = "<group>"; };
 		AC3187E227FF2AAF00D9BF30 /* TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3187E527FF2AAF00D9BF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3187E727FF2AAF00D9BF30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,37 +63,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA37E0664D3A5EDAA1C50564 /* Pods_TV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C193AA2070F042AD138198F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0CA4BEF8CB0B959FD38CC91B /* Pods_TV.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7084F2AB52E4779507A5C64F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				88E1D71417DE733E1C41C565 /* Pods-TV.debug.xcconfig */,
-				4D8E3733590518A4DEFE080A /* Pods-TV.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		AC3187D927FF2AAF00D9BF30 = {
 			isa = PBXGroup;
 			children = (
 				AC3187E427FF2AAF00D9BF30 /* TV */,
 				AC3187E327FF2AAF00D9BF30 /* Products */,
-				7084F2AB52E4779507A5C64F /* Pods */,
-				4C193AA2070F042AD138198F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,11 +138,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC3187F627FF2AB000D9BF30 /* Build configuration list for PBXNativeTarget "TV" */;
 			buildPhases = (
-				E3B381085EAE9D1056C9C8D1 /* [CP] Check Pods Manifest.lock */,
 				AC3187DE27FF2AAF00D9BF30 /* Sources */,
 				AC3187DF27FF2AAF00D9BF30 /* Frameworks */,
 				AC3187E027FF2AAF00D9BF30 /* Resources */,
-				C3145703C20F5D25F2B96D25 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,48 +195,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C3145703C20F5D25F2B96D25 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TV/Pods-TV-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TV/Pods-TV-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TV/Pods-TV-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E3B381085EAE9D1056C9C8D1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TV-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AC3187DE27FF2AAF00D9BF30 /* Sources */ = {
@@ -422,7 +354,6 @@
 		};
 		AC3187F727FF2AB000D9BF30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88E1D71417DE733E1C41C565 /* Pods-TV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -433,7 +364,7 @@
 				INFOPLIST_FILE = TV/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -451,7 +382,6 @@
 		};
 		AC3187F827FF2AB000D9BF30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D8E3733590518A4DEFE080A /* Pods-TV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,7 +392,7 @@
 				INFOPLIST_FILE = TV/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

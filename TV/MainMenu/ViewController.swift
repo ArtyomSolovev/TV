@@ -27,6 +27,11 @@ class ViewController: UIViewController {
         self.presenter.loadView(controller: self, view: self.viewChoose)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        viewChoose.frame = self.view.bounds 
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.view.addSubview(viewChoose)
     }

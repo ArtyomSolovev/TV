@@ -110,8 +110,6 @@ final class DetailView: UIView, UIPopoverPresentationControllerDelegate {
     
     fileprivate func setButtonSettings() {
         self.addSubview(self.buttonSettings)
-//        self.buttonSettings.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//        self.buttonSettings.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         self.buttonSettings.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -44).isActive = true
         self.buttonSettings.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -44).isActive = true
     }

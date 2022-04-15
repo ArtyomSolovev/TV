@@ -19,8 +19,8 @@ final class DetailPresenter {
     private func setHandlers(){
         viewDeatail?.onTouchedDismiss = {
             self.controllerDetail?.dismiss(animated: true, completion: nil)
-            self.controllerDetail?.viewDidLayoutSubviews()//?
-            self.viewDeatail?.layoutIfNeeded()//?
+//            self.controllerDetail?.viewDidLayoutSubviews()//?
+//            self.viewDeatail?.layoutIfNeeded()//?
         }
         viewDeatail?.onTouchedSettings = { [weak self] vc in
             self?.controllerDetail?.present(vc, animated: true)
@@ -46,6 +46,7 @@ final class DetailPresenter {
 extension DetailPresenter: IDetailPresenter {
     func setSelectedChannel(channel: Channel) {
         self.modelDetail.setSelectedChannel(channel: channel)
+        self.controllerDetail?.updateVideo(quality: channel.url)
     }
     
     func loadView(controller: DetailViewController, view: IDetailView) {

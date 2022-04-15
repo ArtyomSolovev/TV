@@ -185,3 +185,10 @@ extension View: UISearchBarDelegate{
         self.collectionView.reloadData()
     }
 }
+
+extension View: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+            return true
+    }
+}
